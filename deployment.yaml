@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: s-secure
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: s-secure
+  template:
+    metadata:
+      labels:
+        app: s-secure
+    spec:
+      containers:
+      - name: s-secure
+        image: gcr.io/kubernetes-e2e-test-images/echoserver:2.1
+        ports:
+        - containerPort: 8080

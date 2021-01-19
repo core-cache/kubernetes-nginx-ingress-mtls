@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    nginx.ingress.kubernetes.io/auth-tls-secret: "default/s-secure-certs"
+  name: s-secure-ingress
+  namespace: default
+spec:
+  rules:
+  - host: s-secure.com
+    http:
+      paths:
+      - backend:
+          serviceName: s-secure-svc
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - s-secure.com
+    secretName: s-secure-certs
